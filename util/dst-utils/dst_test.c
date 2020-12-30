@@ -36,6 +36,17 @@
 
 #define CA_NODE "/dev/dvb/adapter0/ca0"
 
+//https://github.com/braice/MuMuDVB/commit/596f7dbebd2590f7e77cf755af46952f340ddb97
+#ifndef CA_SET_PID
+typedef struct ca_pid {
+       unsigned int pid;
+       int index;      /* -1 == disable*/
+       } ca_pid_t;
+//We should not be able to get it so a number that is unlikely to happen
+#define CA_SET_PID 42424242
+#endif
+
+
 static int dst_comms(int cafd, uint32_t tag, uint32_t function, struct ca_msg *msg)
 {
 	if (tag) {
